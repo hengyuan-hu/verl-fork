@@ -1287,6 +1287,7 @@ class CriticWorker(Worker, DistProfilerExtension):
                 torch_dtype,
                 critic_model_config,
                 config.model.get("trust_remote_code", False),
+                attn_implementation,
             )
 
             use_remove_padding = config.model.get("use_remove_padding", False)

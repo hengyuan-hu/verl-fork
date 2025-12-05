@@ -41,7 +41,9 @@ model:
   tokenizer_path: ${oc.select:actor_rollout_ref.model.path,"~/models/deepseek-llm-7b-chat"}
 
   # Hugging Face config override
-  override_config: {}
+  override_config: {
+    attn_implementation: sdpa
+  }
 
   # External model implementation (optional)
   external_lib: ${oc.select:actor_rollout_ref.model.external_lib,null}
@@ -125,10 +127,10 @@ profiler:
 
       # Required when using verl.utils.omega_conf_to_dataclass to instantiate dataclass configs
       _target_: verl.utils.profiler.config.NsightToolConfig
-    
+
       # True for each task has its own database, False for all tasks in one training step share one database.
       discrete: ${oc.select:global_profiler.global_tool_config.nsys.discrete}
-    
+
     # npu config
     npu:
 
@@ -147,7 +149,7 @@ profiler:
 
       # True for each task has its own database, False for all tasks in one training step share one database.
       discrete: False
-    
+
     # torch profiler config
     torch:
 
@@ -173,4 +175,3 @@ profiler:
 
       # Stack trace depth for memory allocations
       stack_depth: ${oc.select:global_profiler.global_tool_config.torch_memory.stack_depth,32}
-      
