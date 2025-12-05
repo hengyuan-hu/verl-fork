@@ -323,6 +323,10 @@ class TaskRunner:
             config, tokenizer, num_examine=1, **config.reward_model.get("reward_kwargs", {})
         )
 
+        print("reward functions")
+        print(reward_fn)
+        print(val_reward_fn)
+
         resource_pool_manager = self.init_resource_pool_mgr(config)
 
         from verl.utils.dataset.rl_dataset import collate_fn
